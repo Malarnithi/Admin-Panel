@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Example</title>
+    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,7 +15,7 @@
         }
 
         .topnav {
-            background-color: #333;
+            background-color: #e7e4e4;
             overflow: hidden;
             padding: 10px;
             text-align: center;
@@ -26,17 +27,12 @@
         }
 
         .topnav a {
-            color: white;
+            color: #b66d6d;
             text-decoration: none;
             display: inline-block;
             margin: 0 20px;
             font-size: 18px;
         }
-
-        .topnav a:hover {
-            border-bottom: 2px solid white;
-        }
-
         .sidenav {
             height: 100%;
             width: 200px;
@@ -44,7 +40,7 @@
             z-index: 1;
             top: 60px; /* Adjusted top position for the top navbar */
             left: 0;
-            background-color: #111;
+            background-color: #e7e4e4;
             padding-top: 20px;
         }
 
@@ -52,18 +48,32 @@
             padding: 8px 8px 8px 16px;
             text-decoration: none;
             font-size: 18px;
-            color: #818181;
+            color: #b66d6d;
             display: block;
         }
 
         .sidenav a:hover {
-            color: #f1f1f1;
+            color: #3d1818;
         }
 
         .sidenav h2 {
-            color: white;
+            color: #b66d6b;
             text-align: center;
             margin-bottom: 20px;
+        }
+
+        .collapsible {
+            cursor: pointer;
+        }
+
+        .arrow {
+            float: right;
+        }
+
+        .sublist {
+            padding-left: 20px;
+            font-size: 16px;
+            display: none;
         }
 
         .content {
@@ -76,24 +86,94 @@
 
 <div class="topnav">
     <img src="your-logo.png" alt="Logo">
-    <a href="login.html" style="float: right;">Logout</a>
+    <a href="#" style="float: right;">Logout</a>
 </div>
 
 <div class="sidenav">
     <h2>Main Menu</h2>
-    <a href="#" class="active">Dashboard</a>
-    <a href="#">Categories</a>
-    <a href="#">Courses</a>
-    <a href="#">Students</a>
-    <a href="#">Images</a>
-    <a href="#">Videos</a>
-    <a href="#">Settings</a>
+
+    <div class="collapsible">
+        <a href="#">Dashboard</a>
+    </div>
+
+    <div class="collapsible">
+        <a href="#">Categories <div class="arrow">&#9658;</div></a>
+        <div class="sublist">
+            <a href="#">All Categories</a>
+            <a href="#">Add Categories</a>
+            <a href="#">Edit Categories</a>
+            <a href="#">Delete Categories</a>
+        </div>
+    </div>
+
+    <div class="collapsible">
+        <a href="#">Courses <div class="arrow">&#9658;</div></a>
+        <div class="sublist">
+            <a href="#">All Courses</a>
+            <a href="#">Add Courses</a>
+            <a href="#">Delete Courses</a>
+        </div>
+    </div>
+
+    <div class="collapsible">
+        <a href="#">Students <div class="arrow">&#9658;</div></a>
+        <div class="sublist">
+            <a href="#">All Students</a>
+            <a href="#">Add Students</a>
+            <a href="#">Edit Students</a>
+            <a href="#">Delete Students</a>
+        </div>
+    </div>
+
+    <div class="collapsible">
+        <a href="#">Images <div class="arrow">&#9658;</div></a>
+        <div class="sublist">
+            <a href="#">All Images</a>
+            <a href="#">Add Images</a>
+            <a href="#">Delete Images</a>
+        </div>
+    </div>
+
+    <div class="collapsible">
+        <a href="#">Videos <div class="arrow">&#9658;</div></a>
+        <div class="sublist">
+            <a href="#">All Videos</a>
+            <a href="#">Add Videos</a>
+            <a href="#">Delete Videos</a>
+        </div>
+    </div>
+
+    <div class="collapsible">
+        <a href="#">Settings <div class="arrow">&#9658;</div></a>
+        <div class="sublist">
+            <a href="#">Edit User</a>
+            <a href="#">Add User</a>
+            <a href="#">Delete User</a>
+        </div>
+    </div>
+
 </div>
 
 <div class="content">
     <h2>Dashboard</h2>
     <p>This is the dashboard content. You can add your dashboard-related information here.</p>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const collapsibles = document.querySelectorAll('.collapsible');
+
+        collapsibles.forEach(function (collapsible) {
+            const sublist = collapsible.querySelector('.sublist');
+            const arrow = collapsible.querySelector('.arrow');
+
+            collapsible.addEventListener('click', function () {
+                sublist.style.display = sublist.style.display === 'block' ? 'none' : 'block';
+                arrow.innerHTML = sublist.style.display === 'block' ? '&#9660;' : '&#9658;';
+            });
+        });
+    });
+</script>
 
 </body>
 </html>
