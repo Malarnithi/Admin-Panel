@@ -26,7 +26,7 @@
     </div>
 
     <div class="collapsible">
-        <a href="all-categories.html">Categories <div class="arrow">&#9658;</div></a>
+        <a href="#">Categories <div class="arrow">&#9658;</div></a>
         <div class="sublist">
             <a href="all-categories.html">All Categories</a>
             <a href="add-categories.html">Add Categories</a>
@@ -82,7 +82,7 @@
     </div>
 
 </div>
-<!-- <div class="dashboard">
+<div class="dashboard">
 <div class="content">
         <div class="live-course"> </div>
         <div class="live-students"> </div>
@@ -94,23 +94,8 @@
     <div class="donught-chart"> </div>
     <div class="graph"> </div>
     </div>
-</div> -->
+</div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const collapsibles = document.querySelectorAll('.collapsible');
-
-        collapsibles.forEach(function (collapsible) {
-            const sublist = collapsible.querySelector('.sublist');
-            const arrow = collapsible.querySelector('.arrow');
-
-            collapsible.addEventListener('click', function () {
-                sublist.style.display = sublist.style.display === 'block' ? 'none' : 'block';
-                arrow.innerHTML = sublist.style.display === 'block' ? '&#9660;' : '&#9658;';
-            });
-        });
-    });
-</script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const collapsibles = document.querySelectorAll('.collapsible');

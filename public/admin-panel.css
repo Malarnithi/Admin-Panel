@@ -8,9 +8,12 @@ body {
 }
 
 .topnav {
+    width: 100%;
     background-color: #f6fafb;
     overflow: hidden;
     padding: 10px;
+    position: fixed;
+    z-index: 1;
 }
 
 .brand-name{
@@ -31,7 +34,7 @@ body {
     width: 200px;
     position: fixed;
     z-index: 1;
-    top: 60px; /* Adjusted top position for the top navbar */
+    top: 50px; /* Adjusted top position for the top navbar */
     left: 0;
     background-color: #f6fafb;
 }
