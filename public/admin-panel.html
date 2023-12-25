@@ -12,106 +12,49 @@
     
 </head>
 <body>
+    <div id="navigation-placeholder">
+        <script>
+            // Function to handle collapsible behavior
+            function handleCollapsibles() {
+                const collapsibles = document.querySelectorAll('.collapsible');
 
-<div class="topnav">
-    <span class="brand-name">NSchool Academy</span>
-    <a href="login.html" style="float: right;">Logout</a>
-</div>
+                collapsibles.forEach(function (collapsible) {
+                    const sublist = collapsible.querySelector('.sublist');
+                    const arrow = collapsible.querySelector('.arrow');
 
-<div class="sidenav">
-    <h2>Main Menu</h2>
+                    collapsible.addEventListener('click', function () {
+                        sublist.classList.toggle('show-sublist');
+                        arrow.innerHTML = sublist.classList.contains('show-sublist') ? '&#9660;' : '&#9658;';
+                    });
+                });
+            }
 
-    <div class="collapsible">
-        <a href="#">Dashboard</a>
-    </div>
-
-    <div class="collapsible">
-        <a href="#">Categories <div class="arrow">&#9658;</div></a>
-        <div class="sublist">
-            <a href="all-categories.html">All Categories</a>
-            <a href="add-categories.html">Add Categories</a>
-            <a href="edit-categories.html">Edit Categories</a>
-            <a href="delete-categories.html">Delete Categories</a>
-        </div>
-    </div>
-
-    <div class="collapsible">
-        <a href="#">Courses <div class="arrow">&#9658;</div></a>
-        <div class="sublist">
-            <a href="#">All Courses</a>
-            <a href="#">Add Courses</a>
-            <a href="#">Delete Courses</a>
-        </div>
-    </div>
-
-    <div class="collapsible">
-        <a href="#">Students <div class="arrow">&#9658;</div></a>
-        <div class="sublist">
-            <a href="#">All Students</a>
-            <a href="#">Add Students</a>
-            <a href="#">Edit Students</a>
-            <a href="#">Delete Students</a>
-        </div>
-    </div>
-
-    <div class="collapsible">
-        <a href="#">Images <div class="arrow">&#9658;</div></a>
-        <div class="sublist">
-            <a href="#">All Images</a>
-            <a href="#">Add Images</a>
-            <a href="#">Delete Images</a>
-        </div>
-    </div>
-
-    <div class="collapsible">
-        <a href="#">Videos <div class="arrow">&#9658;</div></a>
-        <div class="sublist">
-            <a href="#">All Videos</a>
-            <a href="#">Add Videos</a>
-            <a href="#">Delete Videos</a>
-        </div>
-    </div>
-
-    <div class="collapsible">
-        <a href="#">Settings <div class="arrow">&#9658;</div></a>
-        <div class="sublist">
-            <a href="#">Edit User</a>
-            <a href="#">Add User</a>
-            <a href="#">Delete User</a>
-        </div>
-    </div>
-
-</div>
-<div class="dashboard">
-<div class="content">
-        <div class="live-course"> </div>
-        <div class="live-students"> </div>
-        <div class="completed-students"> </div>
-        <div class="placed-students"> </div>
-</div>
-<div class="chart">
-    <div class="bar-chart"> </div>
-    <div class="donught-chart"> </div>
-    <div class="graph"> </div>
-    </div>
-</div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const collapsibles = document.querySelectorAll('.collapsible');
-
-        collapsibles.forEach(function (collapsible) {
-            const sublist = collapsible.querySelector('.sublist');
-            const arrow = collapsible.querySelector('.arrow');
-
-            collapsible.addEventListener('click', function () {
-                sublist.style.display = sublist.style.display === 'block' ? 'none' : 'block';
-                arrow.innerHTML = sublist.style.display === 'block' ? '&#9660;' : '&#9658;';
+            document.addEventListener('DOMContentLoaded', function () {
+                // Fetch and insert navigation.html content
+                fetch('navigation.html')
+                    .then(response => response.text())
+                    .then(html => {
+                        document.getElementById('navigation-placeholder').innerHTML = html;
+                        // Call the function to handle collapsibles after inserting HTML content
+                        handleCollapsibles();
+                    })
+                    .catch(error => console.error('Error loading navigation:', error));
             });
-        });
-    });
-</script>
+        </script>
+    </div>
 
-
+    <div class="dashboard">
+        <div class="content">
+            <div class="live-course"> </div>
+            <div class="live-students"> </div>
+            <div class="completed-students"> </div>
+            <div class="placed-students"> </div>
+        </div>
+        <div class="chart">
+            <div class="bar-chart"> </div>
+            <div class="donught-chart"> </div>
+            <div class="graph"> </div>
+        </div>
+    </div>
 </body>
 </html>

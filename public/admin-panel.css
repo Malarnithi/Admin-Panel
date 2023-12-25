@@ -9,7 +9,7 @@ body {
 
 .topnav {
     width: 100%;
-    background-color: #f6fafb;
+    background-color: #9ebde4;
     overflow: hidden;
     padding: 10px;
     position: fixed;
@@ -31,32 +31,32 @@ body {
 }
 .sidenav {
     height: 100%;
-    width: 200px;
+    width: 240px;
     position: fixed;
     z-index: 1;
-    top: 50px; /* Adjusted top position for the top navbar */
+    top: 60px; /* Adjusted top position for the top navbar */
     left: 0;
-    background-color: #f6fafb;
+    background-color: #19467e;
 }
 
 .sidenav a {
     padding: 8px 8px 8px 16px;
     text-decoration: none;
     font-size: 16px;
-    color: #f27330;
+    color: white;
     display: block;
     cursor: pointer;
 }
 
 .sidenav a:hover {
-    color: #19467e;
+    color: #f27330;
 }
 .sidenav a:not(.collapsible) {
     cursor: default; 
 }
 
 .sidenav h2 {
-    color: #f27330;
+    color: white;
     text-align: center;
     margin-bottom: 20px;
 }
@@ -74,9 +74,16 @@ body {
     font-size: 16px;
     display: none;
 }
+.sublist {
+    display: none;
+}
 
+.show-sublist {
+    display: block;
+}
 .content {
     height: 180px;
+    margin-top: 50px;
     margin-left: 200px;
     padding: 20px;
     display: grid;

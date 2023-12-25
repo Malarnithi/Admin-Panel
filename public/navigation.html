@@ -1,0 +1,169 @@
+<!-- navigation.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="admin-panel.css">
+    <style>
+        /* Add your styles here */
+        .sublist {
+            display: none;
+        }
+
+        .sublist.show-sublist {
+            display: block;
+        }
+        nav {
+            width: 40%;
+            font-size: 25px;
+            margin-top: 80px;
+            margin-left: 220px;
+            color: black;
+            border: dotted;
+            font-size: 18px !important;
+        }
+        li {
+            display: inline;
+        }
+
+        /* Breadcrumb styles */
+        .breadcrumb {
+            background-color: #fff; /* Set your desired background color */
+            padding: 8px 15px;
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+        }
+    </style>
+    <title>Your Page Title</title>
+</head>
+<body>
+
+<div id="navigation-content">
+    <div class="topnav">
+        <span class="brand-name">NSchool Academy</span>
+        <a href="login.html" style="float: right;">Logout</a>
+    </div>
+
+    <div class="sidenav">
+        <h2>Main Menu</h2>
+
+        <div class="collapsible">
+            <a href="#">Dashboard</a>
+        </div>
+
+        <div class="collapsible">
+            <a href="#" onclick="toggleSublist(this)"><span class="arrow">&#9658;</span> Catalog</a>
+            <div class="sublist">
+                <a href="categories.html">Categories</a>
+                <a href="#">Home</a>
+                <a href="#">Course</a>
+                <a href="#">Careers</a>
+                <a href="#">Blog</a>
+                <a href="#">Testimonials</a>
+                <a href="#">Placement Partners</a>
+            </div>
+        </div>
+
+        <div class="collapsible">
+            <a href="#">Enquiry details</a>
+        </div>
+
+        <div class="collapsible">
+            <a href="#">Students</a>
+        </div>
+
+        <div class="collapsible">
+            <a href="#">Images</a>
+        </div>
+
+        <div class="collapsible">
+            <a href="#">Videos</a>
+        </div>
+
+        <div class="collapsible">
+            <a href="#" onclick="toggleSublist(this)"><span class="arrow">&#9658;</span> Settings</a>
+            <div class="sublist">
+                <a href="#">Edit User</a>
+                <a href="#">Add User</a>
+                <a href="#">Delete User</a>
+            </div>
+        </div>
+    </div>  
+</div>  
+
+<!-- <nav aria-label="breadcrumb" class="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">Main Menu ></li>
+        <li class="breadcrumb-item" id="breadcrumb-link"></li>
+    </ol>
+</nav> -->
+
+<script>
+    function toggleSublist(element) {
+        const sublist = element.nextElementSibling;
+        sublist.classList.toggle('show-sublist');
+
+        const arrow = element.querySelector('.arrow');
+        arrow.innerHTML = sublist.classList.contains('show-sublist') ? '&#9660;' : '&#9658;';
+    }
+
+    // document.addEventListener('DOMContentLoaded', function () {
+    //     const collapsibles = document.querySelectorAll('.collapsible');
+    //     const breadcrumbLink = document.getElementById('breadcrumb-link');
+
+    //     collapsibles.forEach(function (collapsible) {
+    //         collapsible.addEventListener('click', function () {
+    //             // Remove 'active-link' class from all collapsibles
+    //             collapsibles.forEach(link => link.classList.remove('active-link'));
+
+    //             // Add 'active-link' class to the clicked collapsible
+    //             collapsible.classList.add('active-link');
+
+    //             // Get the text content of the clicked link
+    //             const clickedLinkText = getLinkText(collapsible);
+
+    //             breadcrumbLink.textContent = 'Main Menu > ' + (clickedLinkText !== '' ? clickedLinkText : '');
+
+    //             // Check if the clicked item has a sublist
+    //             const sublist = collapsible.querySelector('.sublist.show-sublist');
+    //             if (sublist) {
+    //                 // Find the active item within the sublist
+    //                 const activeSublistItem = sublist.querySelector('.active-link');
+    //                 if (activeSublistItem) {
+    //                     breadcrumbLink.textContent += ` > ${getLinkText(activeSublistItem)}`;
+    //                 }
+    //             }
+    //         });
+    //     });
+
+    //     // Set the initial breadcrumb based on the current page
+    //     updateBreadcrumb();
+    // });
+
+    // function updateBreadcrumb() {
+    //     const currentURL = window.location.href;
+    //     const path = new URL(currentURL).pathname;
+
+    //     const matchingLink = Array.from(collapsibles).find(link => {
+    //         const linkURL = link.querySelector('a').getAttribute('href');
+    //         return path.endsWith(linkURL) || path.endsWith(linkURL.replace('.html', ''));
+    //     });
+
+    //     if (matchingLink) {
+    //         const matchingLinkText = getLinkText(matchingLink);
+    //         breadcrumbLink.textContent = '' + (matchingLinkText !== '' ? matchingLinkText : '');
+    //         matchingLink.classList.add('active-link');
+    //     }
+    // }
+
+    // function getLinkText(element) {
+    //     const anchor = element.querySelector('a');
+    //     return anchor.textContent.trim();
+    // }
+</script>
+
+
+</body>
+</html>

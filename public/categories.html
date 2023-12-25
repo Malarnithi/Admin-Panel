@@ -1,0 +1,262 @@
+<!-- public/categories.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="admin-panel.css">
+    <title>Categories</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        #navigation-content {
+            flex: 1;
+        }
+
+        .main-content {
+            flex: 3; 
+            padding: 10px; 
+            margin-top: 100px;
+            margin-left: 250px;
+            box-sizing: border-box;
+        }
+        .categories-content{
+            border: 1px solid #ddd;
+            padding: 15px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .list-tabel{
+            border:dotted;
+        }
+        th{
+            color: #19467e;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: white;
+        }
+        img{
+           padding-right: 10px;
+        }
+        .list-heading{
+            font-size: 25px;
+            color: #19467e;    
+        }
+        nav{
+            width: 100% !important;
+            margin-top: 0px !important;
+            margin-left: 0px !important;
+            border: none !important;
+        }
+        .breadcrumb{
+            padding: 0;
+        }
+        .breadcrumb-heading{
+            color: #4c4d5a;
+            font-size: 25px;
+        }
+        li{
+            padding-left: 10px;
+            color: #4c4d5a;
+            padding-top: 7px;
+        }
+        .running{
+            color:#19467e;
+        }
+        .breadcrumb-item a{
+            color: #4c4d5a !important;
+            text-decoration: none;
+        }
+        .breadcrumb img {
+            cursor: pointer;
+        }
+        .icons-heading{
+           margin-left: 750px;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination a {
+            padding: 10px;
+            margin: 0 5px;
+            text-decoration: none;
+            cursor: pointer;
+            color: #19467e;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .pagination a.active {
+            background-color: #19467e;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Load navigation content dynamically using JavaScript -->
+    <div id="navigation-content"></div>
+
+    <!-- Content specific to categories.html -->
+    <div class="main-content">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <span class="breadcrumb-heading">Categories</span>  
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item running" aria-current="page">Categories</li>
+              <div class="icons-heading">
+                <a href="add-categories.html"><img src="add icon.png" width="40px" height="30px"></a>
+              <img src="referesh icon.png" width="40px" height="30px">
+              <img src="delete icon.png" width="40px" height="30px">
+              </div>
+            </ol>
+          </nav>
+
+          <div class="categories-content">
+            <span class="list-heading"><img src="list icon.png" width="35px" height="20px">Category List</span>
+            <table id="categoryTable">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox"></th>
+                        <th>Category Name</th>
+                        <th>Description</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="categoryTableBody"></tbody>
+            </table>
+            <div class="pagination" id="pagination"></div>
+        </div>
+    </div>
+
+    <script>
+        function executeScript(scriptContent) {
+        const scriptElement = document.createElement('script');
+        scriptElement.innerHTML = scriptContent;
+        document.head.appendChild(scriptElement);
+        document.head.removeChild(scriptElement);
+    }
+
+    // Dynamically load navigation content into the #navigation-content div
+    fetch('navigation.html')
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('navigation-content').innerHTML = html;
+
+            // Execute the script after the content is loaded
+            const scriptElement = document.getElementById('navigation-content').querySelector('script');
+            if (scriptElement) {
+                executeScript(scriptElement.innerHTML);
+            }
+        });
+
+    // Fetch categories and update the table
+    fetch('/all-categories')
+        .then(response => response.json())
+        .then(categories => {
+            const tableBody = document.getElementById('categoryTableBody');
+
+            categories.forEach(category => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><input type="checkbox"></td>
+                    <td>${category.categoryName}</td>
+                    <td>${category.description}</td>
+                    <td><img src="edit icon.png" width="40px" height="30px"></td>
+                `;
+                tableBody.appendChild(row);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching categories:', error);
+            // Handle the error, show a message, etc.
+        });
+
+
+        // Function to execute script content
+        function executeScript(scriptContent) {
+            const scriptElement = document.createElement('script');
+            scriptElement.innerHTML = scriptContent;
+            document.head.appendChild(scriptElement);
+            document.head.removeChild(scriptElement);
+        }
+
+        // Dynamically load navigation content into the #navigation-content div
+        fetch('navigation.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('navigation-content').innerHTML = html;
+
+                // Execute the script after the content is loaded
+                const scriptElement = document.getElementById('navigation-content').querySelector('script');
+                if (scriptElement) {
+                    executeScript(scriptElement.innerHTML);
+                }
+            });
+
+        // Your existing JavaScript for pagination
+        document.addEventListener('DOMContentLoaded', function () {
+            const table = document.getElementById('categoryTable');
+            const rowsPerPage = 10;
+            const rows = table.tBodies[0].rows;
+            const pageCount = Math.ceil(rows.length / rowsPerPage);
+            let currentPage = 1;
+
+            function showPage(page) {
+                for (let i = 0; i < rows.length; i++) {
+                    rows[i].style.display = i >= (page - 1) * rowsPerPage && i < page * rowsPerPage ? '' : 'none';
+                }
+            }
+
+            function createPaginationButtons() {
+                const paginationContainer = document.getElementById('pagination');
+                paginationContainer.innerHTML = '';
+
+                for (let i = 1; i <= pageCount; i++) {
+                    const button = document.createElement('a');
+                    button.href = '#';
+                    button.textContent = i;
+                    button.addEventListener('click', function () {
+                        currentPage = i;
+                        showPage(currentPage);
+                        updatePaginationButtons();
+                    });
+                    paginationContainer.appendChild(button);
+                }
+
+                updatePaginationButtons();
+            }
+
+            function updatePaginationButtons() {
+                const buttons = document.getElementById('pagination').getElementsByTagName('a');
+                for (let i = 0; i < buttons.length; i++) {
+                    buttons[i].classList.remove('active');
+                }
+                buttons[currentPage - 1].classList.add('active');
+            }
+
+            showPage(currentPage);
+            createPaginationButtons();
+        });
+    </script>
+</body>
+</html>

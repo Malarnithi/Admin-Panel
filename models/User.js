@@ -1,5 +1,4 @@
 // models/User.js
-
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
@@ -9,13 +8,6 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", userSchema);
 
-// Create a default admin user
-const defaultAdminUser = new User({
-  username: "admin",
-  password: "admin123",
-});
-
-// Save the default admin user to the database
-defaultAdminUser.save();
+// Note: Removed the code for creating and saving default admin user
 
 module.exports = User;

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="admin-panel.css">
+    <link rel="stylesheet" href="add-categories.css">
+    <title>Add Categories</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Load navigation content dynamically using JavaScript -->
+    <div id="navigation-content"></div>
+
+    <!-- Content specific to categories.html -->
+    <div class="main-content">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <span class="breadcrumb-heading">Categories</span>  
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item running" aria-current="page">Categories</li>
+              <div class="icons-heading">
+                <a href="add-categories.html"><img src="add icon.png" width="40px" height="30px"></a>
+                <img src="referesh icon.png" width="40px" height="30px">
+                <img src="delete icon.png" width="40px" height="30px">
+              </div>
+            </ol>
+        </nav>
+
+        <div class="add-categories">
+          <div class="add-categories-heading">Add Category</div>
+          <ul class="nav nav-tabs">
+              <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="add-categories.html">General</a>
+              </li>
+          </ul>
+          <form id="categoryForm">
+            <div class="mb-3">
+                <label for="categoryName" class="form-label">Category Name</label>
+                <input type="text" class="form-control" id="categoryName" required>
+            </div>
+            <div class="mb-3">
+                <label for="categoryDescription" class="form-label">Category Description</label>
+                <textarea class="form-control" id="categoryDescription" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Category</button>
+        </form>
+      </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Function to execute script content
+        function executeScript(scriptContent) {
+            const scriptElement = document.createElement('script');
+            scriptElement.innerHTML = scriptContent;
+            document.head.appendChild(scriptElement);
+            document.head.removeChild(scriptElement);
+        }
+
+        // Dynamically load navigation content into the #navigation-content div
+        fetch('navigation.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('navigation-content').innerHTML = html;
+
+                // Execute the script after the content is loaded
+                const scriptElement = document.getElementById('navigation-content').querySelector('script');
+                if (scriptElement) {
+                    executeScript(scriptElement.innerHTML);
+                }
+            });
+
+        document.getElementById('categoryForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get category name and description values
+            const categoryName = document.getElementById('categoryName').value;
+            const categoryDescription = document.getElementById('categoryDescription').value;
+
+            // Send data to the server using fetch
+            fetch('/add-category', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    categoryName: categoryName,
+                    categoryDescription: categoryDescription,
+                }),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data.message);
+                // You can perform additional actions after successfully adding the category
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Handle errors if any
+            });
+        });
+    });
+  </script>
+</body>
+</html>
