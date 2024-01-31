@@ -39,7 +39,7 @@ body {
     left: 7%;
     width: 86%;
     height: 46%;
-    z-index: -1;
+    z-index: -1;    
     border-radius: 20px 20px 50px 50px;
     background-image: url(bg1.png);
     background-size: 100% 100%;

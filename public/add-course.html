@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="admin-panel.css">
+    <link rel="stylesheet" href="add-categories.css">
+    <title>Add Category</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="navigation-content"></div>
+
+    <div class="main-content">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <span class="breadcrumb-heading">Course</span>  
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item running" aria-current="page">Course</li>
+                <div class="icons-heading">
+                    <a href="add-course.html"><img src="add icon.png" width="50px" height="40px"></a>
+                    <img src="cancel icon.png" width="50px" height="40px" onclick="deleteSelectedCategories()">
+                </div>
+            </ol>
+        </nav>
+        
+        <div class="add-categories">
+            <p class="add-categories-heading">Add Course Details</p>
+            <form id="addCategoryForm" onsubmit="event.preventDefault(); addCategory();">
+                <div class="input-group mb-3">
+                    <label for="categoryName" class="input-group-text" id="basic-addon1">Select Course:</label>
+                    <!-- Add a dropdown for selecting the course -->
+                    <select id="categoryName" name="categoryName" class="form-control">
+                        <!-- Options will be populated dynamically using JavaScript -->
+                    </select>
+                </div>
+                <div class="input-group mb-3">
+                    <label for="description" class="input-group-text" id="basic-addon1">Description:</label>
+                    <input id="description" name="categoryDescription" autocomplete="off" required type="text" class="form-control" placeholder="Description" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary">Add Category</button>
+                </div>
+                <div id="messageContainer"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        async function addCategory() {
+            const categoryName = document.getElementById('categoryName').value;
+            const categoryDescription = document.getElementById('description').value;
+
+            try {
+                const response = await fetch('http://localhost:4000/add-category', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ categoryName, categoryDescription }),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    messageContainer.innerHTML = '<div class="alert alert-success" role="alert">Category added successfully</div>';
+                    // Redirect or perform any other action as needed
+                } else {
+                    messageContainer.innerHTML = `<div class="alert alert-danger" role="alert">${data.message || 'Failed to add category'}</div>`;
+                }
+            } catch (error) {
+                console.error(error);
+                document.getElementById('messageContainer').innerHTML = '<div class="alert alert-danger" role="alert">An error occurred while adding the category</div>';
+            }
+        }
+
+        function executeScript(scriptContent) {
+            const scriptElement = document.createElement('script');
+            scriptElement.innerHTML = scriptContent;
+            document.head.appendChild(scriptElement);
+            document.head.removeChild(scriptElement);
+        }
+
+        async function populateCourseDropdown() {
+        try {
+            const response = await fetch('http://localhost:4000/course-descriptions');
+            
+            if (!response.ok) {
+                throw new Error(`Failed to fetch subcategories: ${response.status} ${response.statusText}`);
+            }
+
+            const subcategories = await response.json();
+
+            const selectElement = document.getElementById('categoryName');
+            selectElement.innerHTML = '';
+
+            subcategories.forEach(subcategory => {
+                const option = document.createElement('option');
+                option.value = subcategory;
+                option.text = subcategory;
+                selectElement.add(option);
+            });
+
+            console.log('Subcategories fetched successfully:', subcategories);
+        } catch (error) {
+            console.error('Error fetching subcategories:', error);
+        }
+    }
+
+    // Dynamically load navigation content into the #navigation-content div
+    fetch('navigation.html')
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('navigation-content').innerHTML = html;
+
+            // Execute the script after the content is loaded
+            const scriptElement = document.getElementById('navigation-content').querySelector('script');
+            if (scriptElement) {
+                executeScript(scriptElement.innerHTML);
+            }
+        });
+
+    // Populate the course dropdown when the page loads
+    populateCourseDropdown();
+
+        // Dynamically load navigation content into the #navigation-content div
+        fetch('navigation.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('navigation-content').innerHTML = html;
+
+                // Execute the script after the content is loaded
+                const scriptElement = document.getElementById('navigation-content').querySelector('script');
+                if (scriptElement) {
+                    executeScript(scriptElement.innerHTML);
+                }
+            });
+
+        // Populate the course dropdown when the page loads
+        populateCourseDropdown();
+    </script>
+</body>
+</html>

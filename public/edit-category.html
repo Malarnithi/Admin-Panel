@@ -1,0 +1,65 @@
+<!-- public/edit-category.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="admin-panel.css">
+    <title>Edit Category</title>
+</head>
+<body>
+    <h2>Edit Category</h2>
+
+    <form id="editCategoryForm">
+        <label for="categoryName">Category Name:</label>
+        <input type="text" id="categoryName" name="categoryName" required>
+
+        <label for="categoryDescription">Category Description:</label>
+        <textarea id="categoryDescription" name="categoryDescription" required></textarea>
+
+        <button type="button" onclick="updateCategory()">Update Category</button>
+    </form>
+
+    <script>
+        function updateCategory() {
+            // Fetch the category ID from the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const categoryId = urlParams.get('id');
+
+            // Get the form values
+            const categoryName = document.getElementById('categoryName').value;
+            const categoryDescription = document.getElementById('categoryDescription').value;
+
+            // Prepare the data to send to the server
+            const data = {
+                id: categoryId,
+                name: categoryName,
+                description: categoryDescription
+            };
+
+            // Call the server to update the category
+            fetch('http://localhost:4000/update-category', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Failed to update category: ${response.status} ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then(updatedCategory => {
+                alert('Category updated successfully');
+                // Optionally, redirect to the categories page or do other actions
+            })
+            .catch(error => {
+                console.error('Error updating category:', error);
+                // Handle the error, show a message, etc.
+            });
+        }
+    </script>
+</body>
+</html>

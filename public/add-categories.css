@@ -10,7 +10,7 @@ body {
 .main-content {
     flex: 3; 
     padding: 10px; 
-    margin-top: 100px;
+    margin-top: 60px;
     margin-left: 250px;
     box-sizing: border-box;
     color: #4c4d5a;
@@ -23,6 +23,7 @@ nav{
 }
 .breadcrumb{
     padding: 0;
+    background-color: #DDE9F8 !important;
 }
 .breadcrumb-heading{
     color: #4c4d5a;
@@ -44,15 +45,24 @@ li{
     cursor: pointer;
 }
 .icons-heading{
-   margin-left: 750px;
+   margin-left: 845px;
 }
 .add-categories{
+    width:40%;
+    margin: auto;
+    margin-top: 50px;
     border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 20px;
 }
-.add-categories-heading{
-    width:100%;
+.add-categories-heading {
     padding: 10px;
-    font-size: 18px;
+    margin: auto !important;
+    font-size: 20px;
+    font-weight: 700;
+    border: 1px solid #ddd;
+    background-color: #DDE9F8;
+    color: #19467e; 
 }
 .add-form{
     border: 1px solid #ddd;
@@ -60,4 +70,10 @@ li{
 }
 .input-group{
     padding-bottom: 20px;
+}
+img{
+    padding-right: 10px;
+ }
+#addCategoryForm{
+    margin-top: 20px;
 }

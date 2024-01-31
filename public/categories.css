@@ -1,0 +1,100 @@
+/* categories/css */
+body {
+margin: 0;
+padding: 0;
+display: flex;
+}
+
+#navigation-content {
+flex: 1;
+}
+
+.main-content {
+flex: 3; 
+padding: 10px; 
+margin-top: 60px;
+margin-left: 250px;
+box-sizing: border-box;
+}
+.categories-content{
+border: 1px solid #efeaea;
+padding: 15px;
+}
+img{
+padding-right: 10px;
+}
+.list-heading{
+width:100%;
+padding: 10px;
+font-size: 20px;
+font-weight: 700;
+border: 1px solid #efecec;
+background-color: #DDE9F8;
+color: #19467e;    
+}
+nav{
+width: 100% !important;
+margin-top: 0px !important;
+margin-left: 0px !important;
+border: none !important;
+}
+.breadcrumb{
+padding: 0;
+background-color: #DDE9F8 !important;
+}
+.breadcrumb-heading{
+color: #4c4d5a;
+font-size: 22px;
+}
+li{
+padding-left: 10px;
+color: #4c4d5a;
+padding-top: 5px;
+}
+.running{
+color:#19467e;
+}
+.breadcrumb-item a{
+color: #4c4d5a !important;
+text-decoration: none;
+}
+.breadcrumb img {
+cursor: pointer;    
+}
+.icons-heading{
+margin-left: 800px;
+}
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+    color: #4c4d5a !important;
+}
+.checkbox-column{
+    width: 30px;
+}
+.table th{
+    color: #19467e !important;
+}
+.pagination {
+display: flex;
+justify-content: center;
+margin-top: 20px;
+}
+
+.pagination a {
+padding: 6px;
+padding-left: 13px;
+padding-right: 13px;
+margin: 0px 5px;
+text-decoration: none;
+cursor: pointer;
+color: #19467e;
+border: 1px solid #ddd;
+border-radius: 5px;
+}
+
+.pagination a.active {
+background-color: #19467e;
+color: white;
+}
